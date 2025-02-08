@@ -14,6 +14,3 @@ def build_model(input_shape):
 
     model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
     return model
-
-if __name__=="__main__":
-    build_model(13).summary()
