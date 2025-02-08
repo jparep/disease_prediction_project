@@ -25,7 +25,7 @@ def scale_data(df, features, target):
     X_train, X_test, y_train, y_test = train_test_split(features_scaled, target, test_size=0.2, random_state=42)
     return X_train, X_test, y_train, y_test, scaler
 
-def save_to_csv(X_train, X_test, y_train, y_test):
+def save_to_csv(X_train, X_test, scaler):
     """"Save split data into to csv files"""
     # Save processed data
     pd.DataFrame(X_train).to_csv(TRAIN_DATA_FILE, index=False)
@@ -49,3 +49,6 @@ if __name__ == "__main__":
     
     # Preprocess data
     X_train, X_test, y_train, y_test, scaler = scale_data(df, features, target)
+    
+    # Save processed data
+    save_to_csv(X_train, X_test, scaler)
