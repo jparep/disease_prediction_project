@@ -15,6 +15,7 @@ def load_data():
     """Load raw health data from CSV file."""
     try:
         df = pd.read_csv(RAW_DATA_FILE)
+        print(f"Loaded dataset with {df.shape[0]} rows and {df.shape[1]} columns.")
         return df
     except FileNotFoundError:
         print(f"Error: {RAW_DATA_FILE} not found. Ensure the file is present.")
@@ -24,13 +25,14 @@ def load_data():
         raise
 
 
-def preprocess_data(df):
+def preprocess_data():
     """
     Preprocess health dataset:
     - Extract features & target
     - Scale features using StandardScaler
     - Split into train & test sets
     """
+    df = load_data()
     if "heart_disease" not in df.columns:
         raise ValueError("Dataset must contain 'heart_disease' as a target column.")
 
@@ -40,10 +42,9 @@ def preprocess_data(df):
     scaler = StandardScaler()
     features_scaled = scaler.fit_transform(features)
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        features_scaled, target, test_size=0.2, random_state=42
-    )
-
+    X_train, X_test, y_train, y_test = train_test_split(features_scaled, target, test_size=0.2, random_state=42)
+    
+    print(f"Processed data: Train size = {X_train.shape[0]}, Test size = {X_test.shape[0]}")
     return X_train, X_test, y_train, y_test, scaler
 
 
@@ -65,10 +66,6 @@ def save_to_csv(X_train, X_test, scaler):
 
 if __name__ == "__main__":
     print("🔹 Starting Data Processing Pipeline...")
-
-    # Load raw dataset
-    df = load_data()
-    print(f"Loaded dataset with {df.shape[0]} rows and {df.shape[1]} columns.")
 
     # Preprocess data
     X_train, X_test, y_train, y_test, scaler = preprocess_data(df)
