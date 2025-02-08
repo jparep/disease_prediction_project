@@ -17,6 +17,7 @@ TRAIN_DATA_FILE = os.path.join(DATA_PATH, "train_data.csv")
 TEST_DATA_FILE = os.path.join(DATA_PATH, "test_data.csv")
 SCALER_FILE = os.path.join(MODEL_PATH, "scaler.joblib")
 MODEL_FILE = os.path.join(MODEL_PATH, "model.joblib")
+MODEL_FILE = os.path.join(MODEL_PATH, "model.h5")
 
 # GLOABAL VARIABLES
 TARGET = "heart_disease"

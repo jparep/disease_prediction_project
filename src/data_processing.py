@@ -1,6 +1,5 @@
 import os
 import sys
-import numpy as np
 import pandas as pd
 import joblib
 from sklearn.model_selection import train_test_split
@@ -16,13 +15,13 @@ def load_data():
     """Load raw health data from CSV file."""
     try:
         df = pd.read_csv(RAW_DATA_FILE)
-        print(f"✅ Loaded dataset with {df.shape[0]} rows and {df.shape[1]} columns.")
+        print(f"Loaded dataset with {df.shape[0]} rows and {df.shape[1]} columns.")
         return df
     except FileNotFoundError:
-        print(f"❌ Error: {RAW_DATA_FILE} not found. Ensure the file is present.")
+        print(f"Error: {RAW_DATA_FILE} not found. Ensure the file is present.")
         raise
     except Exception as e:
-        print(f"❌ Unexpected error loading data: {e}")
+        print(f"Unexpected error loading data: {e}")
         raise
 
 
@@ -35,7 +34,7 @@ def preprocess_data():
     """
     df = load_data()
     if TARGET not in df.columns:
-        raise ValueError(f"❌ Dataset must contain '{TARGET}' as a target column.")
+        raise ValueError(f"Dataset must contain '{TARGET}' as a target column.")
 
     # Split into features and target
     features = df.drop(columns=[TARGET])
@@ -48,7 +47,7 @@ def preprocess_data():
     # Split into train and test sets
     X_train, X_test, y_train, y_test = train_test_split(features_scaled, target, test_size=0.2, random_state=42)
 
-    print(f"✅ Processed data: Train size = {X_train.shape[0]}, Test size = {X_test.shape[0]}")
+    print(f"Processed data: Train size = {X_train.shape[0]}, Test size = {X_test.shape[0]}")
     return X_train, X_test, y_train, y_test, scaler
 
 
@@ -66,14 +65,14 @@ def save_to_csv():
         test_df["target"] = y_test.values
         test_df.to_csv(TEST_DATA_FILE, index=False)
 
-        print(f"✅ Train and test datasets saved at:\n   {TRAIN_DATA_FILE}\n   {TEST_DATA_FILE}")
+        print(f"Train and test datasets saved at:\n   {TRAIN_DATA_FILE}\n   {TEST_DATA_FILE}")
 
         # Save scaler for inference
         joblib.dump(scaler, SCALER_FILE)
-        print(f"✅ Scaler saved at {SCALER_FILE}")
+        print(f"Scaler saved at {SCALER_FILE}")
 
     except Exception as e:
-        print(f"❌ Error saving processed data: {e}")
+        print(f"Error saving processed data: {e}")
         raise
 
 
