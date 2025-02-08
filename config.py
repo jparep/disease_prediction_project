@@ -4,8 +4,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Define directories
-DATA_PATH = os.path.join(BASE_DIR, "..", "data")
-MODEL_PATH = os.path.join(BASE_DIR, "..", "models")
+DATA_PATH = os.path.join(BASE_DIR, "data")
+MODEL_PATH = os.path.join(BASE_DIR, "models")
 
 # Ensure directories exist
 os.makedirs(DATA_PATH, exist_ok=True)
