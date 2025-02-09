@@ -40,7 +40,7 @@ except Exception as e:
 
 # Save model in TensorFlow SavedModel format (for deployment)
 try:
-    model.save(SAVEMODEL_VERSIONED)
-    print(f"Model saved successfully in TensorFlow SavedModel format at {SAVEMODEL_VERSIONED}")
+    model.export(SAVEMODEL_VERSIONED)
+    print(f"Model exported successfully in TensorFlow SavedModel format at {SAVEMODEL_VERSIONED}")
 except Exception as e:
-    print(f"Error saving model in SavedModel format: {e}")
+    print(f"Error exporting model in SavedModel format: {e}")
