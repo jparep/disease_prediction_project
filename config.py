@@ -11,17 +11,16 @@ MODEL_PATH = os.path.join(BASE_DIR, "models")
 os.makedirs(DATA_PATH, exist_ok=True)
 os.makedirs(MODEL_PATH, exist_ok=True)
 
-# Define file paths
+# Define data file paths
 RAW_DATA_FILE = os.path.join(DATA_PATH, "raw_data.csv")
 TRAIN_DATA_FILE = os.path.join(DATA_PATH, "train_data.csv")
 TEST_DATA_FILE = os.path.join(DATA_PATH, "test_data.csv")
 SCALER_FILE = os.path.join(MODEL_PATH, "scaler.joblib")
-MODEL_FILE = os.path.join(MODEL_PATH, "model.joblib")
-MODEL_H5 = os.path.join(MODEL_PATH, "model.h5")                 #Legacy Keras format
-MODEL_KERAS = os.path.join(MODEL_PATH, "model.keras")           #Current Keras format
-SAVEMODLE_PATH = os.path.join(MODEL_PATH, "disease_prediction") #SavedModel format (recommended for industrial deployment)
 
-
+# Define model file paths
+MODEL_H5 = os.path.join(MODEL_PATH, "model.h5")                 # Legacy Keras format
+MODEL_KERAS = os.path.join(MODEL_PATH, "model.keras")           # Current Keras format
+SAVEMODEL_PATH = os.path.join(MODEL_PATH, "disease_prediction") # SavedModel format (recommended)
 
 # Define target column
 TARGET = "heart_disease"
