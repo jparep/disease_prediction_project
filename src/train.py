@@ -1,4 +1,3 @@
-
 import os
 # Suppress TensorFlow CUDA, cuDNN, and CPU optimization warnings
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # 0 = all messages, 1 = INFO, 2 = WARNINGS, 3 = ERRORS only
@@ -11,7 +10,7 @@ tf.config.set_visible_devices([], 'GPU')
 
 from model import build_model
 from data_processing import preprocess_data
-from config import MODEL_FILE
+from config import MODEL_KERAS_FILE, MODEL_SAVED_PATH
 
 # Load train-test datasets
 X_train, X_test, y_train, y_test, _ = preprocess_data()
@@ -22,7 +21,10 @@ model = build_model(X_train.shape[1])
 # Train model
 history = model.fit(X_train, y_train, epochs=5, batch_size=64, validation_data=(X_test, y_test))
 
-# Save trained model using config path (use recommended format)
-MODEL_FILE_KERAS = MODEL_FILE.replace(".h5", ".keras")
-model.save(MODEL_FILE_KERAS)
-print(f" Model saved successfully at {MODEL_FILE_KERAS}")
+# Save model in `.keras` format (For development & testing)
+model.save(MODEL_KERAS_FILE)  
+print(f"Model saved successfully in .keras format at {MODEL_KERAS_FILE}")
+
+# Save model in TensorFlow SavedModel format (For deployment)
+model.save(MODEL_SAVED_PATH, save_format="tf")
+print(f"Model saved successfully in TensorFlow SavedModel format at {MODEL_SAVED_PATH}")
