@@ -1,19 +1,18 @@
-# Use Python 3.11 Slim as the base image
+# Use a lightweight Python image
 FROM python:3.11-slim
 
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy the dependencies file to the working directory
+# Copy requirements and install dependencies
 COPY requirements.txt .
-RUN pip install --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-# Copy the content of the local src directory to the working directory
+# Copy the entire project, including the SavedModel folder
 COPY . .
 
-# Expose the port 8000 for FastAPI
-EXPOSE 8000
+# Set environment variable for TensorFlow
+ENV SAVEMODEL_PATH="/app/models/disease_prediction"
 
-# Run the FadtAPI application
-CMD ["uvicorn", "deploy:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run FastAPI app with Uvicorn
+CMD ["uvicorn", "src.deploy:app", "--host", "0.0.0.0", "--port", "8000"]

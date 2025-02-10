@@ -137,3 +137,14 @@ saved_model/
 # Windows
 Thumbs.db
 ehthumbs.db
+
+# Ignore Environment Files
+environment.yml
+
+# Ignore model files
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+*.pth
+*.keras

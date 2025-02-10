@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  fastapi-app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - TF_CPP_MIN_LOG_LEVEL=3
+    volumes:
+      - ./models:/app/models
+    restart: always
