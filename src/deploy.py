@@ -1,5 +1,5 @@
 import tensorflow as tf
-from keras.src.layers import TFSMLayer
+from keras.export import TFSMLayer  # ✅ Correct import for Keras 3+
 import os
 from fastapi import FastAPI
 from pydantic import BaseModel
