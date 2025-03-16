@@ -52,11 +52,6 @@ def configure_environment(use_gpu: bool = False, memory_growth: bool = True) -> 
                         tf.config.experimental.set_memory_growth(gpu, True)
                         logger.info(f"Enabled memory growth for {gpu}")
                     
-                    # Optional: Configure memory limit if needed
-                    # tf.config.experimental.set_virtual_device_configuration(
-                    #    gpu,
-                    #    [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=4096)]
-                    # )
         except Exception as e:
             logger.warning(f"Error configuring GPUs: {e}")
             logger.info("Falling back to CPU execution")
@@ -70,6 +65,7 @@ def create_callbacks(model_version: str) -> list:
     checkpoint_path = os.path.join(LOGS_PATH, model_version, "checkpoints")
     os.makedirs(checkpoint_path, exist_ok=True)
     
+    # Define callbacks
     callbacks = [
         # Early stopping to prevent overfitting
         EarlyStopping(
