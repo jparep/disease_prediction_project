@@ -1,8 +1,4 @@
-#!/usr/bin/env python3
-"""
-ML Model Training Script - Production Ready
-Handles training, evaluation, and model export with proper logging and error handling.
-"""
+
 import os
 import sys
 import time
@@ -40,6 +36,7 @@ def configure_environment(use_gpu: bool = False, memory_growth: bool = True) -> 
     # Suppress TensorFlow warnings
     os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"  # 0=all, 1=INFO, 2=WARNING, 3=ERROR
     
+    # Check if GPU should be used
     if not use_gpu:
         logger.info("Forcing CPU-only execution")
         os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
